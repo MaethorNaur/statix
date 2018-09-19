@@ -331,7 +331,7 @@ defmodule Statix do
     {host, port, prefix} = load_config(module)
     conn = Conn.new(host, port)
     header = IO.iodata_to_binary([conn.header | prefix])
-    %{conn | header: header, sock: module <> ".Statix"}
+    %{conn | header: header, sock: (Atom.to_string(module) <> ".Statix") |> String.to_atom()}
   end
 
   @doc false
